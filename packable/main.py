@@ -1,10 +1,8 @@
 import asyncio
 import typing
 from typing import Any
-
 import discord
 from discord.ext import commands
-
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='>', intents=intents)
@@ -18,6 +16,7 @@ async def ping(m):
 async def help(m) -> None:
     await m.send('pong')
 
+
 if __name__ == "__main__":
     from os import *
     import pathlib
@@ -29,25 +28,25 @@ if __name__ == "__main__":
 
     file = pathlib.Path(__file__).resolve()
     prefix = file.parent
-    ERROR = "STOP"
 
     try:
-        token = environ["token"]
+        token = environ["TOKEN"]
     except KeyError:
-        token = ERROR
+        token = environ["ERROR"]
 
     intents = discord.Intents.all()
 
     class MyBot(commands.Bot):
-        async def on_ready(self) -> None:
-            print("ready")
+        async def on_ready(self):
+            print("Ready")
 
-        async def setup_hook(self) -> None:
+        async def setup_hook(self):
             await self.load_extension(file.stem)
+
             try:
                 guild_id = getenv["GUILD"]
             except KeyError:
-                guild_id = ERROR
+                guild_id = environ["ERROR"]
 
             guild = self.get_guild(guild_id)
             if guild is None:
