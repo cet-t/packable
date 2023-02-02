@@ -11,8 +11,11 @@ bot = commands.Bot(command_prefix='>', intents=intents)
 
 
 @bot.command()
-async def ping(ctx):
-    await ctx.send('pong')
+async def ping(m):
+    await m.send('pong')
+
+async def help(m) -> None:
+    await m.send('pong')
 
 if __name__ == "__main__":
     import os
