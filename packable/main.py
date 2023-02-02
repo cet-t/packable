@@ -8,7 +8,7 @@ bot = commands.Bot(command_prefix='$', intents=intents)
 
 
 @bot.command()
-async def test(ctx):
+async def test(ctx):  # ? $test で呼び出し
     await ctx.send("test sent")
 
 
