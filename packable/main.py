@@ -19,7 +19,7 @@ async def help(m) -> None:
     await m.send('pong')
 
 if __name__ == "__main__":
-    import os
+    from os import *
     import pathlib
 
     import discord
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     ERROR = "STOP"
 
     try:
-        token = os.environ["token"]
+        token = environ["token"]
     except KeyError:
         token = ERROR
 
@@ -45,7 +45,7 @@ if __name__ == "__main__":
         async def setup_hook(self) -> None:
             await self.load_extension(file.stem)
             try:
-                guild_id =
+                guild_id = getenv["GUILD"]
             except KeyError:
                 guild_id = ERROR
 
