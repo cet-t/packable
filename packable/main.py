@@ -14,24 +14,27 @@ bot = commands.Bot(command_prefix='>', intents=intents)
 async def ping(m):
     await m.send('pong')
 
+
 async def help(m) -> None:
     await m.send('pong')
 
 if __name__ == "__main__":
     import os
-    from pathlib import Path
+    import pathlib
 
     import discord
-    from dotenv import load_dotenv as denv
+    from dotenv import load_dotenv
 
-    denv()
+    load_dotenv()
 
-    file = Path(__file__).resolve()
+    file = pathlib.Path(__file__).resolve()
     prefix = file.parent
-    # try:
-    #     token = os.environ["token"]
-    # except KeyError:
-    #     token = os.environ["DIS_TEST_TOKEN"]
+    ERROR = "STOP"
+
+    try:
+        token = os.environ["token"]
+    except KeyError:
+        token = ERROR
 
     intents = discord.Intents.all()
 
@@ -41,7 +44,11 @@ if __name__ == "__main__":
 
         async def setup_hook(self) -> None:
             await self.load_extension(file.stem)
-            guild_id = ID_HERE
+            try:
+                guild_id =
+            except KeyError:
+                guild_id = ERROR
+
             guild = self.get_guild(guild_id)
             if guild is None:
                 guild = await self.fetch_guild(guild_id)
