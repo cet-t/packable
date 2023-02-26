@@ -43,6 +43,11 @@ async def add(ctx):
     await ctx.reply('準備中')
 
 
+@bot.command()
+async def test(ctx):  # ? $test で呼び出し
+    await ctx.send("test sent")
+
+
 if __name__ == "__main__":
     import os
     from dotenv import load_dotenv
