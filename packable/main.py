@@ -1,10 +1,13 @@
 ﻿import discord
 from discord.ext import commands
+from discord_slash import SlashCommand
+
 import json
 import typing
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='pack ', intents=intents)
+slash = SlashCommand(bot, sync_command=True)
 
 dice_name: str
 dice_crew: str
@@ -45,7 +48,8 @@ async def add(ctx):
 
 @bot.command()
 async def test(ctx):  # ? $test で呼び出し
-    await ctx.send("test sent")
+    await ctx.send('send')
+    await ctx.reply('reply')
 
 
 if __name__ == "__main__":
