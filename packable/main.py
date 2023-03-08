@@ -3,7 +3,8 @@ from discord.ext import commands
 from discord_slash import SlashCommand
 
 import json
-import typing
+# import typing
+from typing import Any
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='pack ', intents=intents)
@@ -14,7 +15,7 @@ dice_crew: str
 dice_crit: int
 
 
-class DicerDict:
+class Dicer:
     infos_path = './info.json'
 
     def __init__(self, ign: str, joined_crew: str, crit_damage: int) -> None:
@@ -22,21 +23,21 @@ class DicerDict:
         self.crew = joined_crew
         self.crit = crit_damage
 
-    def to_dict(self) -> dict[str, typing.Any]:
-        info: dict[str, typing.Any] = {
+    def to_dict(self) -> dict[str, Any]:
+        info: dict[str, Any] = {
             'name': self.name,
             'crew': self.crew,
             'crit': self.crit
         }
         return info
 
-    def write_json(self, info_data: dict[str, typing.Any]):
+    def write_json(self, info_data: dict[str, Any]):
         with open(self.infos_path, 'w') as f:
             json.dump(info_data, f)
 
 
 def read_json(ign: str):
-    with open(DicerDict.infos_path) as f:
+    with open(Dicer.infos_path) as f:
         load_info = json.load(f)
         return load_info
 
@@ -54,8 +55,8 @@ async def test(ctx):  # ? $test で呼び出し
 
 if __name__ == "__main__":
     import os
-    from dotenv import load_dotenv
-    load_dotenv()
+    import dotenv
+    dotenv.load_dotenv()
 
     token = os.environ["TOKEN"]
 
